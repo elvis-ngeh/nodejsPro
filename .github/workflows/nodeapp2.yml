@@ -1,0 +1,31 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Linter (ESLint)
+      run: npm run lint
+
+    - name: Formatter (Prettier)
+      run: npm run prettier
+
+    - name: Test (Jest)
+      env:
+        CI: true
+      run: npm run test
+
+    - name: Build
+      run: npm run build
